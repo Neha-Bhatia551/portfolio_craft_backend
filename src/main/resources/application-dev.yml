@@ -6,6 +6,9 @@ spring:
     url: jdbc:postgresql://database-1.cjg6mo6cilor.us-east-1.rds.amazonaws.com:5432/portfoliodb
     username: postgres
     password: portfoliodb
+#    url: "jdbc:h2:mem:library-db"
+#    driverClassName: "org.h2.Driver"
+    #  h2.console.enabled: true
 
   jpa:
     show-sql: true
