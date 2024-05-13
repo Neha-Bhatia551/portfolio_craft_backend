@@ -1,0 +1,45 @@
+name: CI/CD
+
+on:
+  push:
+    branches: 
+      - '*' 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Project
+        run: mvn clean install -DskipTests
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+
+      - name: Build Docker image
+        run: docker build -t pavithra6120/backend_docker .
+
+      - name: Publish image to Docker Hub
+        run: docker push pavithra6120/backend_docker:latest
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Pull Image from Docker Hub
+        run: docker pull pavithra6120/backend_docker:latest
+
+      - name: Delete old container
+        run: docker rm -f backend_docker-container || true
+
+      - name: Run Docker container
+        run: docker run -d -p 8080:8080 --name backend_docker-container pavithra6120/backend_docker
