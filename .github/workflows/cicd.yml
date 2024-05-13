@@ -36,10 +36,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Pull Image from Docker Hub
-        run: docker pull pavithra6120/backend_docker:latest
+        run: sudo docker pull pavithra6120/backend_docker:latest
 
       - name: Delete old container
-        run: docker rm -f backend_docker-container || true
+        run: sudo docker rm -f backend_docker-container || true
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 --name backend_docker-container pavithra6120/backend_docker
+        run: sudo docker run -d -p 8080:8080 --name backend_docker-container pavithra6120/backend_docker
