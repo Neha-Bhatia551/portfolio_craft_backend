@@ -20,7 +20,14 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
+    @GetMapping("/liststring")
+    public ResponseEntity<String> list() {
+        try {
+            return new ResponseEntity<>("hello neha", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @GetMapping("/list")
     public ResponseEntity<List<UserTable>> getAllUsers() {
         try {
