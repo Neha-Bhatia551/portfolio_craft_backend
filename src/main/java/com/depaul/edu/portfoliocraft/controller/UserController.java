@@ -1,14 +1,13 @@
 package com.depaul.edu.portfoliocraft.controller;
 
-import com.depaul.edu.portfoliocraft.model.UserTable;
+import com.depaul.edu.portfoliocraft.model.UserInfo;
 import com.depaul.edu.portfoliocraft.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +27,10 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/list")
-    public ResponseEntity<List<UserTable>> getAllUsers() {
+    @GetMapping("/info")
+    public ResponseEntity<List<UserInfo>> getAllUsers() {
         try {
-            List<UserTable> users = new ArrayList<UserTable>();
+            List<UserInfo> users = new ArrayList<UserInfo>();
 
             users = userService.list();
 
@@ -43,4 +42,17 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<UserInfo> getCandidateById(@PathVariable int id) {
+        UserInfo info = userService.getInfoById(id);
+        return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<UserInfo> createCandidate(@RequestBody UserInfo info) {
+        UserInfo savedCandidate = userService.saveInfo(info);
+        return ResponseEntity.ok(savedCandidate);
+    }
+
 }
