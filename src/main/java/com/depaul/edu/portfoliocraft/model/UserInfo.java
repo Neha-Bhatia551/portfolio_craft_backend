@@ -18,6 +18,8 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private int templateid;
+
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 

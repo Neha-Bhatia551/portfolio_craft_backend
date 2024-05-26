@@ -33,6 +33,14 @@ public class UserService {
         return info.orElse(null);
     }
 
+    public List<UserInfo> getInfoByTemplateId(int id) {
+        List<UserInfo> info = userRepository.findAllByTemplateid(id);
+        return info;
+    }
+
+
+
+
     public UserInfo saveInfo(UserInfo info) {
         return userRepository.save(info);
     }

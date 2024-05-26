@@ -24,8 +24,32 @@ public class UserInfoController {
         return userService.getInfoById(id);
     }
 
+    @GetMapping("/template/{id}")
+    public List<UserInfo> getUserInfoByTemplateid(@PathVariable int id) {
+        return userService.getInfoByTemplateId(id);
+    }
+
     @PostMapping
     public UserInfo createUserInfo(@RequestBody UserInfo userInfo) {
         return userService.saveInfo(userInfo);
     }
+
+    @PostMapping("/template/1")
+    public UserInfo createUserInfoT1(@RequestBody UserInfo userInfo) {
+        userInfo.setTemplateid(1);
+        return userService.saveInfo(userInfo);
+    }
+
+    @PostMapping("/template/2")
+    public UserInfo createUserInfoT2(@RequestBody UserInfo userInfo) {
+        userInfo.setTemplateid(2);
+        return userService.saveInfo(userInfo);
+    }
+
+    @PostMapping("/template/3")
+    public UserInfo createUserInfoT3(@RequestBody UserInfo userInfo) {
+        userInfo.setTemplateid(3);
+        return userService.saveInfo(userInfo);
+    }
+
 }

@@ -2,6 +2,7 @@ DROP TABLE usertable;
 
 CREATE TABLE userinfo (
                             id SERIAL PRIMARY KEY,
+                            templateid int,
                             name VARCHAR(100) NOT NULL,
                             role VARCHAR(100),
                             university VARCHAR(100),
