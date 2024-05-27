@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Log4j2
 public class UserService {
@@ -21,7 +20,7 @@ public class UserService {
         log.info("Entering the list user method.");
         try {
             var retval = userRepository.findAll();
-            log.info("Exiting the list user method successfully with size = " +  retval.size());
+            log.info("Exiting the list user method successfully with size = " + retval.size());
             return retval;
         } catch (Exception e) {
             log.error("Exception caught in list user method: " + e.getMessage());
@@ -34,7 +33,17 @@ public class UserService {
         return info.orElse(null);
     }
 
+    public List<UserInfo> getInfoByTemplateId(int id) {
+        List<UserInfo> info = userRepository.findAllByTemplateid(id);
+        return info;
+    }
+
+
+
+
     public UserInfo saveInfo(UserInfo info) {
         return userRepository.save(info);
     }
+
+   
 }
