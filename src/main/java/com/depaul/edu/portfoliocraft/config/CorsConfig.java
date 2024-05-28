@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                       // .allowedOrigins("*") // Update with your frontend URL
+                        //.allowedOrigins("https://githubchanges.d13pxxqfa6lm4s.amplifyapp.com/") // Update with your frontend URL
                         .allowedOriginPatterns("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")

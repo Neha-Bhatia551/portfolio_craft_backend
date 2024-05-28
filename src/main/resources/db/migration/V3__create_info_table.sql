@@ -11,7 +11,7 @@ CREATE TABLE userinfo (
                             tech_stack TEXT,
                             projects TEXT,
                             summary TEXT,
-                            email VARCHAR(255) UNIQUE NOT NULL,
+                            email VARCHAR(255) NOT NULL,
                             phone_number VARCHAR(20),
                             linked_in VARCHAR(255)
 );
