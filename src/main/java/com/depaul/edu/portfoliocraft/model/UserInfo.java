@@ -1,11 +1,7 @@
 package com.depaul.edu.portfoliocraft.model;
 
-
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
 
 @Data
 @Builder
@@ -52,5 +48,4 @@ public class UserInfo {
 
     @Column(name = "linked_in", length = 255)
     private String linkedIn;
-
 }
