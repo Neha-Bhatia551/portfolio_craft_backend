@@ -1,11 +1,10 @@
 package com.depaul.edu.portfoliocraft.model;
 
-
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.List;
 
 @Data
 @Builder
@@ -32,17 +31,24 @@ public class UserInfo {
     @Column(name = "education")
     private String education;
 
+    @ElementCollection
+    @CollectionTable(name = "experience_list", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "experience")
-    private String experience;
+    private List<String> experiences;
 
     @Column(name = "tech_stack")
     private String techStack;
 
-    @Column(name = "projects")
-    private String projects;
+    @ElementCollection
+    @CollectionTable(name = "project_list", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "project")
+    private List<String> projects;
 
     @Column(name = "summary")
     private String summary;
+
+    @Column(name = "gpa")
+    private String gpa;
 
     @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
@@ -52,5 +58,4 @@ public class UserInfo {
 
     @Column(name = "linked_in", length = 255)
     private String linkedIn;
-
 }
